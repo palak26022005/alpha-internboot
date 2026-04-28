@@ -1,0 +1,94 @@
+/* Students Table Styling - Premium & Modern */
+.table-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 50px rgba(0,31,63,0.12);
+    border: 1px solid rgba(77,149,255,0.15);
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.students-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+.students-table thead {
+    background: linear-gradient(135deg, #001f3f 0%, #002b55 100%);
+    color: white;
+}
+
+.students-table th {
+    padding: 20px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.students-table th i {
+    margin-right: 8px;
+    opacity: 0.9;
+}
+
+.students-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.students-table tbody tr:hover {
+    background: #f8fbff;
+    transform: scale(1.01);
+    box-shadow: 0 8px 25px rgba(77,149,255,0.1);
+}
+
+.students-table td {
+    padding: 18px 16px;
+    border-bottom: 1px solid #eef2f6;
+}
+
+.students-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.students-table strong {
+    color: #001f3f;
+}
+
+/* Back Button */
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: #e3f2fd;
+    color: #0066cc;
+    text-decoration: none;
+    border-radius: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1.5px solid #bbdefb;
+}
+
+.btn-secondary:hover {
+    background: #bbdefb;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(187,222,251,0.5);
+}
+
+/* Empty State inside table */
+.table-card .empty-state {
+    padding: 80px 40px;
+    text-align: center;
+    color: #666;
+}
+
+.table-card .empty-state i {
+    font-size: 68px;
+    color: #bbdefb;
+    margin-bottom: 20px;
+}

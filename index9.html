@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InternBoot Registration Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="https://internboot.com/img/logos/InternBoot.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #002b5c 0%, #004080 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 650px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-section img {
+            width: 220px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            margin-bottom: 15px;
+        }
+
+        .logo-section h1 {
+            color: #0d47a1;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .logo-section p {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .collaboration-logo {
+            width: 350px;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .form-title {
+            text-align: center;
+            color: #0d47a1;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #e3f2fd;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        label .required {
+            color: #d32f2f;
+            margin-left: 2px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            font-size: 15px;
+            font-family: "Poppins", sans-serif;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #0d47a1;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+        }
+
+        input.error,
+        select.error {
+            border-color: #d32f2f;
+            background-color: #ffebee;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 40px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: "Poppins", sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(13, 71, 161, 0.3);
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(13, 71, 161, 0.4);
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .btn-loading {
+            background: linear-gradient(135deg, #757575 0%, #9e9e9e 100%) !important;
+            position: relative;
+        }
+
+        .btn-loading::after {
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            left: 50%;
+            margin-left: -8px;
+            margin-top: -8px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%) !important;
+        }
+
+        .btn-error {
+            background: linear-gradient(135deg, #c62828 0%, #d32f2f 100%) !important;
+        }
+
+        .success,
+        .error {
+            text-align: center;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #2e7d32;
+        }
+
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #c62828;
+        }
+
+        .success.show,
+        .error.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Input hints */
+        .input-hint {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            .logo-section h1 {
+                font-size: 24px;
+            }
+
+            .form-title {
+                font-size: 20px;
+            }
+
+            .collaboration-logo {
+                width: 280px;
+            }
+        }
+
+        /* Progress indicator */
+        .progress-bar {
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0d47a1 0%, #1565c0 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <img src="https://internboot.com/img/logos/InternBoot.webp"
+                alt="InternBoot Logo">
+            <h1>InternBoot</h1>
+            <p>Empowering Students with Real Internship Opportunities 🚀</p>
+            <p style="margin-top: 10px; font-size: 13px;">In collaboration with</p>
+            <img class="collaboration-logo" src="alpha.jpeg" alt="Collaboration Partner">
+        </div>
+
+        <h2 class="form-title">Registration Form</h2>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <form id="registrationForm" action="save_registration.php" method="POST" novalidate>
+
+            <div class="form-group">
+                <label>Full Name <span class="required">*</span></label>
+                <input type="text" id="name" name="name" required>
+                <span class="error-message" id="nameError">Please enter your full name</span>
+            </div>
+
+            <div class="form-group">
+                <label>WhatsApp Number <span class="required">*</span></label>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="+91 1234567890" required>
+                <span class="error-message" id="whatsappError">Please enter a valid WhatsApp number</span>
+                <div class="input-hint">Include country code (e.g., +91 for India)</div>
+            </div>
+
+            <div class="form-group">
+                <label>Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                <span class="error-message" id="emailError">Please enter a valid email address</span>
+            </div>
+
+            <div class="form-group">
+                <label>Country <span class="required">*</span></label>
+                <input list="countryList" id="Country" name="Country" placeholder="Select or type your country"
+                    required>
+                <datalist id="countryList">
+                    <option value="Afghanistan">
+                    <option value="Albania">
+                    <option value="Algeria">
+                    <option value="Andorra">
+                    <option value="Angola">
+                    <option value="Antigua and Barbuda">
+                    <option value="Argentina">
+                    <option value="Armenia">
+                    <option value="Australia">
+                    <option value="Austria">
+                    <option value="Azerbaijan">
+                    <option value="Bahamas">
+                    <option value="Bahrain">
+                    <option value="Bangladesh">
+                    <option value="Barbados">
+                    <option value="Belarus">
+                    <option value="Belgium">
+                    <option value="Belize">
+                    <option value="Benin">
+                    <option value="Bhutan">
+                    <option value="Bolivia">
+                    <option value="Bosnia and Herzegovina">
+                    <option value="Botswana">
+                    <option value="Brazil">
+                    <option value="Brunei">
+                    <option value="Bulgaria">
+                    <option value="Burkina Faso">
+                    <option value="Burundi">
+                    <option value="Cambodia">
+                    <option value="Cameroon">
+                    <option value="Canada">
+                    <option value="Cape Verde">
+                    <option value="Central African Republic">
+                    <option value="Chad">
+                    <option value="Chile">
+                    <option value="China">
+                    <option value="Colombia">
+                    <option value="Comoros">
+                    <option value="Congo">
+                    <option value="Costa Rica">
+                    <option value="Croatia">
+                    <option value="Cuba">
+                    <option value="Cyprus">
+                    <option value="Czech Republic">
+                    <option value="Denmark">
+                    <option value="Djibouti">
+                    <option value="Dominica">
+                    <option value="Dominican Republic">
+                    <option value="Ecuador">
+                    <option value="Egypt">
+                    <option value="El Salvador">
+                    <option value="Equatorial Guinea">
+                    <option value="Eritrea">
+                    <option value="Estonia">
+                    <option value="Eswatini">
+                    <option value="Ethiopia">
+                    <option value="Fiji">
+                    <option value="Finland">
+                    <option value="France">
+                    <option value="Gabon">
+                    <option value="Gambia">
+                    <option value="Georgia">
+                    <option value="Germany">
+                    <option value="Ghana">
+                    <option value="Greece">
+                    <option value="Grenada">
+                    <option value="Guatemala">
+                    <option value="Guinea">
+                    <option value="Guinea-Bissau">
+                    <option value="Guyana">
+                    <option value="Haiti">
+                    <option value="Honduras">
+                    <option value="Hungary">
+                    <option value="Iceland">
+                    <option value="India">
+                    <option value="Indonesia">
+                    <option value="Iran">
+                    <option value="Iraq">
+                    <option value="Ireland">
+                    <option value="Israel">
+                    <option value="Italy">
+                    <option value="Jamaica">
+                    <option value="Japan">
+                    <option value="Jordan">
+                    <option value="Kazakhstan">
+                    <option value="Kenya">
+                    <option value="Kiribati">
+                    <option value="Kuwait">
+                    <option value="Kyrgyzstan">
+                    <option value="Laos">
+                    <option value="Latvia">
+                    <option value="Lebanon">
+                    <option value="Lesotho">
+                    <option value="Liberia">
+                    <option value="Libya">
+                    <option value="Liechtenstein">
+                    <option value="Lithuania">
+                    <option value="Luxembourg">
+                    <option value="Madagascar">
+                    <option value="Malawi">
+                    <option value="Malaysia">
+                    <option value="Maldives">
+                    <option value="Mali">
+                    <option value="Malta">
+                    <option value="Marshall Islands">
+                    <option value="Mauritania">
+                    <option value="Mauritius">
+                    <option value="Mexico">
+                    <option value="Micronesia">
+                    <option value="Moldova">
+                    <option value="Monaco">
+                    <option value="Mongolia">
+                    <option value="Montenegro">
+                    <option value="Morocco">
+                    <option value="Mozambique">
+                    <option value="Myanmar">
+                    <option value="Namibia">
+                    <option value="Nauru">
+                    <option value="Nepal">
+                    <option value="Netherlands">
+                    <option value="New Zealand">
+                    <option value="Nicaragua">
+                    <option value="Niger">
+                    <option value="Nigeria">
+                    <option value="North Korea">
+                    <option value="North Macedonia">
+                    <option value="Norway">
+                    <option value="Oman">
+                    <option value="Pakistan">
+                    <option value="Palau">
+                    <option value="Panama">
+                    <option value="Papua New Guinea">
+                    <option value="Paraguay">
+                    <option value="Peru">
+                    <option value="Philippines">
+                    <option value="Poland">
+                    <option value="Portugal">
+                    <option value="Qatar">
+                    <option value="Romania">
+                    <option value="Russia">
+                    <option value="Rwanda">
+                    <option value="Saint Kitts and Nevis">
+                    <option value="Saint Lucia">
+                    <option value="Saint Vincent and the Grenadines">
+                    <option value="Samoa">
+                    <option value="San Marino">
+                    <option value="Sao Tome and Principe">
+                    <option value="Saudi Arabia">
+                    <option value="Senegal">
+                    <option value="Serbia">
+                    <option value="Seychelles">
+                    <option value="Sierra Leone">
+                    <option value="Singapore">
+                    <option value="Slovakia">
+                    <option value="Slovenia">
+                    <option value="Solomon Islands">
+                    <option value="Somalia">
+                    <option value="South Africa">
+                    <option value="South Korea">
+                    <option value="South Sudan">
+                    <option value="Spain">
+                    <option value="Sri Lanka">
+                    <option value="Sudan">
+                    <option value="Suriname">
+                    <option value="Sweden">
+                    <option value="Switzerland">
+                    <option value="Syria">
+                    <option value="Taiwan">
+                    <option value="Tajikistan">
+                    <option value="Tanzania">
+                    <option value="Thailand">
+                    <option value="Timor-Leste">
+                    <option value="Togo">
+                    <option value="Tonga">
+                    <option value="Trinidad and Tobago">
+                    <option value="Tunisia">
+                    <option value="Turkey">
+                    <option value="Turkmenistan">
+                    <option value="Tuvalu">
+                    <option value="Uganda">
+                    <option value="Ukraine">
+                    <option value="United Arab Emirates">
+                    <option value="United Kingdom">
+                    <option value="United States">
+                    <option value="Uruguay">
+                    <option value="Uzbekistan">
+                    <option value="Vanuatu">
+                    <option value="Vatican City">
+                    <option value="Venezuela">
+                    <option value="Vietnam">
+                    <option value="Yemen">
+                    <option value="Zambia">
+                    <option value="Zimbabwe">
+                </datalist>
+                <span class="error-message" id="countryError">Please select a valid country from the list</span>
+            </div>
+
+            <div class="form-group">
+                <label>Highest Qualification <span class="required">*</span></label>
+                <input type="text" id="qualification" name="qualification" placeholder="e.g., B.Tech, MBA, BBA"
+                    required>
+                <span class="error-message" id="qualificationError">Please enter your qualification</span>
+            </div>
+
+            <div class="form-group">
+                <label>Year of Passing <span class="required">*</span></label>
+                <input type="text" id="passingYear" name="passingYear" placeholder="e.g., 2024" required>
+                <span class="error-message" id="passingYearError">Please enter a valid year</span>
+            </div>
+
+            <div class="form-group">
+                <label>College / University <span class="required">*</span></label>
+                <input type="text" id="college" name="college" placeholder="Your institution name" required>
+                <span class="error-message" id="collegeError">Please enter your college/university name</span>
+            </div>
+
+            <div class="form-group">
+                <label>Internship Domain <span class="required">*</span></label>
+                <select id="domain" name="domain" required>
+                    <option value="" disabled selected>Select your preferred domain</option>
+                    <option>Web Development</option>
+                    <option>Digital Marketing</option>
+                    <option>Data Analyst</option>
+                    <option>Data Science</option>
+                    <option>Financial Analyst</option>
+                    <option>Human Resource</option>
+                    <option>Software Development</option>
+                    <option>Portfolio Management</option>
+                    <option>Sales </option>
+                    <option>Business Development</option>
+                    <option>Cyber Security</option>
+                </select>
+                <span class="error-message" id="domainError">Please select an internship domain</span>
+            </div>
+
+            <div class="form-group">
+                <label>Internship Start Date <span class="required">*</span></label>
+                <select id="startDate" name="startDate" required>
+                    <option value="" disabled selected>Select start date</option>
+                    <!--<option>20th February 2026</option>-->
+                    <!--<option>4th March 2026</option>-->
+                    <!--<option>20th March 2026</option>-->
+                    <option>4th April 2026</option>
+                    <option>20th April 2026</option>
+                     <option>4th May 2026</option>
+                     <option>20th May 2026</option>
+                     <option>4th June 2026</option>
+                     <option>20th June 2026</option>
+                     <option>4th July 2026</option>
+                     <option>20th July 2026</option>
+                     <option>4th August 2026</option>
+                     <option>20th August 2026</option>
+                </select>
+                <span class="error-message" id="startDateError">Please select a start date</span>
+            </div>
+
+            <div class="form-group">
+                <label>Internship Tenure <span class="required">*</span></label>
+                <select id="tenure" name="tenure" required>
+                    <option value="" disabled selected>Select duration</option>
+                    <option>45 Days</option>
+                    <option>2 Months</option>
+                    <option>3 Months</option>
+                    <option>6 Months</option>
+                </select>
+                <span class="error-message" id="tenureError">Please select an internship tenure</span>
+            </div>
+
+            <div class="form-group">
+                <label>Reference (Optional)</label>
+                <input type="text" name="reference" id="reference" placeholder="Who referred you?" value="alpha" readonly="">
+            </div>
+
+            <div id="successMsg" class="success"></div>
+            <div id="errorMsg" class="error"></div>
+
+            <button type="submit" id="submitBtn">Submit Registration</button>
+        </form>
+    </div>
+
+    <script>
+        
+        const form = document.getElementById("registrationForm");
+        const submitBtn = document.getElementById("submitBtn");
+        const progressFill = document.getElementById("progressFill");
+
+        // Country validation list
+        const countryInput = document.getElementById('Country');
+        const countryOptions = Array.from(document.getElementById('countryList').options);
+
+        // Calculate and update progress
+        function updateProgress() {
+            const inputs = form.querySelectorAll('input[required], select[required]');
+            let filled = 0;
+            inputs.forEach(input => {
+                if (input.value.trim() !== '') filled++;
+            });
+            const progress = (filled / inputs.length) * 100;
+            progressFill.style.width = progress + '%';
+        }
+
+        // Add input listeners for progress tracking
+        form.querySelectorAll('input, select').forEach(field => {
+            field.addEventListener('input', updateProgress);
+            field.addEventListener('change', updateProgress);
+        });
+
+        // Validation functions
+        function validateName(name) {
+            return name.trim().length >= 2;
+        }
+
+        function validateWhatsApp(number) {
+            // Remove spaces and check if it's a valid phone number (10-15 digits with optional +)
+            const cleaned = number.replace(/\s/g, '');
+            return /^\+?[1-9]\d{9,14}$/.test(cleaned);
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function validateYear(year) {
+            const currentYear = new Date().getFullYear();
+            const yearNum = parseInt(year);
+            return yearNum >= 1950 && yearNum <= currentYear + 5;
+        }
+
+        function isCountryValid() {
+            return countryOptions.some(option => option.value === countryInput.value);
+        }
+
+        function showError(fieldId, errorId, message) {
+            const field = document.getElementById(fieldId);
+            const error = document.getElementById(errorId);
+            field.classList.add('error');
+            error.textContent = message;
+            error.classList.add('show');
+        }
+
+        function clearError(fieldId, errorId) {
+            const field = document.getElementById(fieldId);
+            const error = document.getElementById(errorId);
+            field.classList.remove('error');
+            error.classList.remove('show');
+        }
+
+        // Real-time validation
+        document.getElementById('name').addEventListener('blur', function () {
+            if (this.value && !validateName(this.value)) {
+                showError('name', 'nameError', 'Name must be at least 2 characters');
+            } else if (this.value) {
+                clearError('name', 'nameError');
+            }
+        });
+
+        document.getElementById('whatsapp').addEventListener('blur', function () {
+            if (this.value && !validateWhatsApp(this.value)) {
+                showError('whatsapp', 'whatsappError', 'Enter a valid phone number with country code');
+            } else if (this.value) {
+                clearError('whatsapp', 'whatsappError');
+            }
+        });
+
+        document.getElementById('email').addEventListener('blur', function () {
+            if (this.value && !validateEmail(this.value)) {
+                showError('email', 'emailError', 'Enter a valid email address');
+            } else if (this.value) {
+                clearError('email', 'emailError');
+            }
+        });
+
+        document.getElementById('passingYear').addEventListener('blur', function () {
+            if (this.value && !validateYear(this.value)) {
+                showError('passingYear', 'passingYearError', 'Enter a valid year (1950-2031)');
+            } else if (this.value) {
+                clearError('passingYear', 'passingYearError');
+            }
+        });
+
+        countryInput.addEventListener('change', function () {
+            if (this.value && !isCountryValid()) {
+                showError('Country', 'countryError', 'Please select a valid country from the dropdown');
+            } else if (this.value) {
+                clearError('Country', 'countryError');
+            }
+        });
+
+        // Form submission
+        // form.addEventListener("submit", async (e) => {
+        //     e.preventDefault();
+
+        //     // Clear previous messages
+        //     document.getElementById("successMsg").classList.remove('show');
+        //     document.getElementById("errorMsg").classList.remove('show');
+
+        //     // Validate all fields
+        //     let isValid = true;
+        //     const validations = [
+        //         { field: 'name', error: 'nameError', validator: () => validateName(document.getElementById('name').value), message: 'Please enter your full name' },
+        //         { field: 'whatsapp', error: 'whatsappError', validator: () => validateWhatsApp(document.getElementById('whatsapp').value), message: 'Please enter a valid WhatsApp number' },
+        //         { field: 'email', error: 'emailError', validator: () => validateEmail(document.getElementById('email').value), message: 'Please enter a valid email address' },
+        //         { field: 'Country', error: 'countryError', validator: isCountryValid, message: 'Please select a valid country from the list' },
+        //         { field: 'qualification', error: 'qualificationError', validator: () => document.getElementById('qualification').value.trim().length > 0, message: 'Please enter your qualification' },
+        //         { field: 'passingYear', error: 'passingYearError', validator: () => validateYear(document.getElementById('passingYear').value), message: 'Please enter a valid year' },
+        //         { field: 'college', error: 'collegeError', validator: () => document.getElementById('college').value.trim().length > 0, message: 'Please enter your college/university' },
+        //         { field: 'domain', error: 'domainError', validator: () => document.getElementById('domain').value !== '', message: 'Please select an internship domain' },
+        //         { field: 'startDate', error: 'startDateError', validator: () => document.getElementById('startDate').value !== '', message: 'Please select a start date' },
+        //         { field: 'tenure', error: 'tenureError', validator: () => document.getElementById('tenure').value !== '', message: 'Please select an internship tenure' }
+        //     ];
+
+        //     validations.forEach(({ field, error, validator, message }) => {
+        //         if (!validator()) {
+        //             showError(field, error, message);
+        //             isValid = false;
+        //         } else {
+        //             clearError(field, error);
+        //         }
+        //     });
+
+        //     if (!isValid) {
+        //         document.getElementById("errorMsg").textContent = "Please fix the errors above before submitting.";
+        //         document.getElementById("errorMsg").classList.add('show');
+        //         return;
+        //     }
+
+        //     // Proceed with submission
+        //     submitBtn.disabled = true;
+        //     submitBtn.textContent = "Submitting...";
+        //     submitBtn.classList.add("btn-loading");
+
+        //     const data = {
+        //         name: document.getElementById("name").value,
+        //         whatsapp: document.getElementById("whatsapp").value,
+        //         email: document.getElementById("email").value,
+        //         Country: document.getElementById("Country").value,
+        //         qualification: document.getElementById("qualification").value,
+        //         passingYear: document.getElementById("passingYear").value,
+        //         college: document.getElementById("college").value,
+        //         domain: document.getElementById("domain").value,
+        //         startDate: document.getElementById("startDate").value,
+        //         tenure: document.getElementById("tenure").value,
+        //         reference: document.getElementById("reference").value
+        //     };
+
+        //     try {
+        //         // const res = await fetch(scriptURL, {
+        //         //     method: "POST",
+        //         //     headers: {
+        //         //         "Content-Type": "application/x-www-form-urlencoded"
+        //         //     },
+        //         //     body: new URLSearchParams(data)
+        //         // });
+
+        //         const result = await res.json();
+
+        //         if (result.status === "success") {
+        //             submitBtn.classList.remove("btn-loading");
+        //             submitBtn.classList.add("btn-success");
+        //             submitBtn.textContent = "Registration Successful ✓";
+
+        //             document.getElementById("successMsg").textContent = "🎉 Registration submitted successfully! We'll contact you soon!";
+        //             document.getElementById("successMsg").classList.add('show');
+
+        //             form.reset();
+        //             progressFill.style.width = '0%';
+
+        //             // Reset button after 3 seconds
+        //             setTimeout(() => {
+        //                 submitBtn.classList.remove("btn-success");
+        //                 submitBtn.textContent = "Submit Registration";
+        //                 submitBtn.disabled = false;
+        //             }, 3000);
+        //         } else {
+        //             throw new Error("Server error");
+        //         }
+
+        //     } catch (err) {
+        //         submitBtn.classList.remove("btn-loading");
+        //         submitBtn.classList.add("btn-error");
+        //         submitBtn.textContent = "Failed - Try Again";
+
+        //         document.getElementById("errorMsg").textContent = "❌ Submission failed. Please check your internet connection and try again.";
+        //         document.getElementById("errorMsg").classList.add('show');
+
+        //         setTimeout(() => {
+        //             submitBtn.classList.remove("btn-error");
+        //             submitBtn.textContent = "Submit Registration";
+        //             submitBtn.disabled = false;
+        //         }, 3000);
+        //     }
+        // });
+    </script>
+
+</body>
+
+</html>
